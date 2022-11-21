@@ -2,7 +2,7 @@ const pageDateTime = document.getElementById("headerDateTime");
 
 async function getAPIData(topic){
     const date = new Date();
-    const _data = await fetch(`https://newsapi.org/v2/everything?q=${topic}&from=${date.getFullYear}-${date.getMonth}-${date.getDate}&sortBy=publishedAt&language=en&apiKey=d8816e862d8c4a569fe083c5668710aa`)
+    const _data = await fetch(`https://newsapi.org/v2/everything?q=${topic}&from=${date.getFullYear}-${date.getMonth}-${date.getDate}&sortBy=publishedAt&language=en&apiKey={API_KEY}`)
     .then((val)=>{
         return val.json()
     })
