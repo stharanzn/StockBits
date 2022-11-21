@@ -2,18 +2,22 @@ const pageDateTime = document.getElementById("headerDateTime");
 
 async function getAPIData(topic){
     const date = new Date();
-    const _data = await fetch(`https://newsapi.org/v2/everything?q=${topic}&from=${date.getFullYear}-${date.getMonth}-${date.getDate}&sortBy=publishedAt&language=en&apiKey={API_KEY}`)
+    const _data = await fetch(`https://newsapi.org/v2/everything?q=${topic}&from=${date.getFullYear}-${date.getMonth}-${date.getDate}&sortBy=publishedAt&language=en&apiKey=d8816e862d8c4a569fe083c5668710aa`)
     .then((val)=>{
         return val.json()
     })
-    console.log("first here ", _data)
+
     return _data;
     
 }
 
-export function displayData(_id, topic, dataLen, _dataDiv){
+export function displayData(_id, topic, dataLen, _dataDiv, customHeader=null){
+    console.log("here");
     getAPIData(topic).then((completedata)=>{
         let data1="";
+        if(customHeader!==null){
+            data1+=customHeader
+        }
         
         for(var i =0; i<dataLen; i++){
             var __dataDiv = _dataDiv;
@@ -25,7 +29,7 @@ export function displayData(_id, topic, dataLen, _dataDiv){
             __dataDiv = __dataDiv.replace("SRC", completedata.articles[i].urlToImage)
             __dataDiv = __dataDiv.replace("TITLE", completedata.articles[i].title)
             __dataDiv = __dataDiv.replace("DATE", _date)
-            __dataDiv = __dataDiv.replace("HREF", completedata.articles[i].url)
+            __dataDiv = __dataDiv.replace("HREF", completedata.articles[i].url)            
             __dataDiv = __dataDiv.replace("DESC", completedata.articles[i].description)            
 
             data1+= __dataDiv
